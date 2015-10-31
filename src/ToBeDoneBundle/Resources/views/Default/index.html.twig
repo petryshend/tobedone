@@ -1,1 +1,18 @@
-This is tobedoneBundle
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <table>
+        <th>id</th>
+        <th>body</th>
+        <th>created</th>
+        <th>finished</th>
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.body }}</td>
+            <td>{{ task.created|date }}</td>
+            <td>{{ task.isFinished }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
