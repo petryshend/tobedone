@@ -86,33 +86,38 @@ class Task
         return $this->created;
     }
 
+    public function setDefaultValues()
+    {
+        $this->created = new \DateTime();
+        $this->isDone= false;
+    }
     /**
-     * Set isFinished
+     * @var boolean
+     */
+    private $isDone;
+
+
+    /**
+     * Set isDone
      *
-     * @param boolean $isFinished
+     * @param boolean $isDone
      *
      * @return Task
      */
-    public function setIsFinished($isFinished)
+    public function setIsDone($isDone)
     {
-        $this->isFinished = $isFinished;
+        $this->isDone = $isDone;
 
         return $this;
     }
 
     /**
-     * Get isFinished
+     * Get isDone
      *
      * @return boolean
      */
-    public function getIsFinished()
+    public function getIsDone()
     {
-        return $this->isFinished;
-    }
-
-    public function setDefaultValues()
-    {
-        $this->created = new \DateTime();
-        $this->isFinished = false;
+        return $this->isDone;
     }
 }

@@ -5,13 +5,25 @@
         <th>id</th>
         <th>body</th>
         <th>created</th>
-        <th>finished</th>
+        <th>done</th>
     {% for task in tasks %}
         <tr>
             <td>{{ task.id }}</td>
             <td>{{ task.body }}</td>
             <td>{{ task.created|date }}</td>
-            <td>{{ task.isFinished }}</td>
+            <td>
+                {% if task.isDone %}
+                    DONE
+                {% else %}
+                    not done
+                {% endif %}
+            </td>
+            <td>
+                <form action="{{ path('to_be_done_set_done') }}" method="post">
+                    <input type="hidden" name="task_id" value="{{ task.id }}">
+                    <input type="submit">
+                </form>
+            </td>
         </tr>
     {% endfor %}
     </table>

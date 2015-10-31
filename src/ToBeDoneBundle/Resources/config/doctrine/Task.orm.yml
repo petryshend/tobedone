@@ -14,7 +14,7 @@ ToBeDoneBundle\Entity\Task:
             length: 255
         created:
             type: datetime
-        isFinished:
+        isDone:
             type: boolean
 
     lifecycleCallbacks:
