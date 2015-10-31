@@ -16,4 +16,6 @@ ToBeDoneBundle\Entity\Task:
             type: datetime
         isFinished:
             type: boolean
-    lifecycleCallbacks: {  }
+
+    lifecycleCallbacks:
+        prePersist: [ setDefaultValues ]
