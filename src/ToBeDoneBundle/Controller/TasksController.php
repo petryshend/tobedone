@@ -3,7 +3,10 @@
 namespace ToBeDoneBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use ToBeDoneBundle\Entity\Task;
+use ToBeDoneBundle\Form\Type\TaskType;
 
 class TasksController extends Controller
 {
@@ -12,9 +15,44 @@ class TasksController extends Controller
         $tasks = $this->getDoctrine()->getRepository('ToBeDoneBundle:Task')
             ->findBy([], ['created' => 'DESC']);
 
-        return $this->render('ToBeDoneBundle:Default:index.html.twig', ['tasks' => $tasks]);
+        $newTask = new Task();
+        $newTaskForm = $this->createForm(
+            new TaskType(),
+            $newTask,
+            [
+                'action' => $this->generateUrl('to_be_done_new_task'),
+                'method' => 'POST',
+            ]
+        );
+
+        return $this->render(
+            'ToBeDoneBundle:Default:index.html.twig',
+            [
+                'tasks' => $tasks,
+                'newTaskForm' => $newTaskForm->createView(),
+            ]
+        );
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function newAction(Request $request)
+    {
+        $task = new Task();
+        $form = $this->createForm(new TaskType(), $task);
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $this->persistTask($task);
+            return $this->redirectToRoute('to_be_done_homepage');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function setDoneAction(Request $request)
     {
         $taskId = $request->get('task_id');
@@ -29,5 +67,15 @@ class TasksController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('to_be_done_homepage');
+    }
+
+    /**
+     * @param Task $task
+     */
+    private function persistTask(Task $task)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
     }
 }

@@ -2,6 +2,11 @@ to_be_done_homepage:
     path:     /
     defaults: { _controller: ToBeDoneBundle:Tasks:index }
 
+to_be_done_new_task:
+    path: /new-task
+    defaults: { _controller: ToBeDoneBundle:Tasks:new }
+    methods: [POST]
+
 to_be_done_set_done:
     path:     /set-done
     defaults: { _controller: ToBeDoneBundle:Tasks:setDone}

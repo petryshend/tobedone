@@ -23,12 +23,6 @@ class Task
     private $created;
 
     /**
-     * @var boolean
-     */
-    private $isFinished;
-
-
-    /**
      * Get id
      *
      * @return integer
