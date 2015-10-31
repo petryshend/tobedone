@@ -1,0 +1,19 @@
+ToBeDoneBundle\Entity\Task:
+    type: entity
+    table: null
+    repositoryClass: ToBeDoneBundle\Entity\TaskRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        body:
+            type: string
+            length: 255
+        created:
+            type: datetime
+        isFinished:
+            type: boolean
+    lifecycleCallbacks: {  }
