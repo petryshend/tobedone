@@ -1,0 +1,28 @@
+body {
+    background: #23527c;
+    color: papayawhip;
+}
+
+input, select, textarea, button {
+    color: #23527c;
+}
+
+.day-tasks {
+    background: papayawhip;
+    color: #23527c;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.date-label {
+    padding-right: 10px;
+}
+
+.task-done {
+    color: #3c3c3c;
+    text-decoration: line-through;
+}
+
+.task-not-done {
+    font-weight: bold;
+}

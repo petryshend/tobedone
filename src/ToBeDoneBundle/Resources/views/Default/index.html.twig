@@ -2,17 +2,31 @@
 
 {% block body %}
 
-    {{ form_start(newTaskForm) }}
-    {{ form_widget(newTaskForm) }}
-    {{ form_end(newTaskForm) }}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
 
-    {% for date, tasksThisDay in tasks %}
-        <p>{{ date|date('D, jS M') }}</p>
-        <ul>
-            {% for task in tasksThisDay %}
-                <li>{{ task.body }}</li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+      <div class="col-md-8">
+
+        {{ form_start(newTaskForm) }}
+        {{ form_widget(newTaskForm) }}
+        {{ form_end(newTaskForm) }}
+
+        {% for date, tasksThisDay in tasks %}
+          <div class="day-tasks">
+            <p class="date-label pull-right">{{ date|date('D, jS M') }}</p>
+            <ul>
+              {% for task in tasksThisDay %}
+                <li class="{% if task.isDone %}task-done{% else %}task-not-done{% endif %}">{{ task.body }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <div class="col-md-2"></div>
+    </div>
+  </div>
 
 {% endblock %}
