@@ -2,10 +2,26 @@
 
 namespace ToBeDoneBundle\Utils;
 
+use ToBeDoneBundle\Entity\Task;
+
 class Utils
 {
-    public function hello()
+    /**
+     * @param Task[] $tasks
+     * @return array
+     */
+    public function splitTasksByDays($tasks)
     {
-        return 'hello';
+        $result = [];
+        foreach ($tasks as $task) {
+            $dateKey = $task->getCreated()->format('Y-m-d');
+            if (array_key_exists($dateKey, $result)) {
+                $result[$dateKey][] = $task;
+            } else {
+                $result[$dateKey] = [$task];
+            }
+        }
+
+        return $result;
     }
 }
