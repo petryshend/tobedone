@@ -26,3 +26,11 @@ input, select, textarea, button {
 .task-not-done {
     font-weight: bold;
 }
+
+li form {
+    display: inline;
+}
+
+.set-task-done-button {
+
+}
