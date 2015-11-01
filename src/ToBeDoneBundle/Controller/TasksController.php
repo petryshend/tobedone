@@ -28,7 +28,7 @@ class TasksController extends Controller
         return $this->render(
             'ToBeDoneBundle:Default:index.html.twig',
             [
-                'tasks' => $tasks,
+                'tasks' => $this->get('to_be_done.utils')->splitTasksByDays($tasks),
                 'newTaskForm' => $newTaskForm->createView(),
             ]
         );

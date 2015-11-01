@@ -6,30 +6,13 @@
     {{ form_widget(newTaskForm) }}
     {{ form_end(newTaskForm) }}
 
-    <table>
-        <th>id</th>
-        <th>body</th>
-        <th>created</th>
-        <th>done</th>
-    {% for task in tasks %}
-        <tr>
-            <td>{{ task.id }}</td>
-            <td>{{ task.body }}</td>
-            <td>{{ task.created|date }}</td>
-            <td>
-                {% if task.isDone %}
-                    DONE
-                {% else %}
-                    not done
-                {% endif %}
-            </td>
-            <td>
-                <form action="{{ path('to_be_done_set_done') }}" method="post">
-                    <input type="hidden" name="task_id" value="{{ task.id }}">
-                    <input type="submit">
-                </form>
-            </td>
-        </tr>
+    {% for date, tasksThisDay in tasks %}
+        <p>{{ date|date('D, jS M') }}</p>
+        <ul>
+            {% for task in tasksThisDay %}
+                <li>{{ task.body }}</li>
+            {% endfor %}
+        </ul>
     {% endfor %}
-    </table>
+
 {% endblock %}

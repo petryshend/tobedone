@@ -23,6 +23,11 @@ class Task
     private $created;
 
     /**
+     * @var boolean
+     */
+    private $isDone;
+
+    /**
      * Get id
      *
      * @return integer
@@ -80,17 +85,6 @@ class Task
         return $this->created;
     }
 
-    public function setDefaultValues()
-    {
-        $this->created = new \DateTime();
-        $this->isDone= false;
-    }
-    /**
-     * @var boolean
-     */
-    private $isDone;
-
-
     /**
      * Set isDone
      *
@@ -113,5 +107,11 @@ class Task
     public function getIsDone()
     {
         return $this->isDone;
+    }
+
+    public function setDefaultValues()
+    {
+        $this->created = new \DateTime();
+        $this->isDone= false;
     }
 }
