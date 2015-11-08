@@ -2,42 +2,52 @@
 
 {% block body %}
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2"></div>
 
-      <div class="col-md-8">
+  <div class="row">
+    <div class="col-md-2"></div>
 
-        {{ form_start(newTaskForm) }}
-        {{ form_widget(newTaskForm) }}
+    <div class="col-md-8">
+
+      <h1>ToBeDone</h1>
+
+      <div class="new-task-form">
+        {{ form_start(newTaskForm, {'attr': {'class': 'form-inline'}}) }}
+        <div class="form-group">
+          {{ form_errors(newTaskForm) }}
+          {{ form_label(newTaskForm.body) }}
+          {{ form_widget(newTaskForm.body, {'attr': {'class': 'form-control', 'size': '80'}}) }}
+        </div>
+        <div class="form-group">
+          {{ form_row(newTaskForm.save, {'attr': {'class': 'btn btn-default'}}) }}
+        </div>
         {{ form_end(newTaskForm) }}
-
-        {% for date, tasksThisDay in tasks %}
-          <div class="day-tasks">
-            <p class="date-label pull-right">{{ date|date('D, jS M') }}</p>
-            <ul>
-              {% for task in tasksThisDay %}
-                <li class="{% if task.isDone %}task-done{% else %}task-not-done{% endif %}">{{ task.body }}
-                  {% if not task.isDone %}
-                    <form action="{{ path('to_be_done_set_done') }}" method="post" class="form-inline">
-                      <input type="hidden" value="{{ task.id }}" name="task_id">
-                      <div class="form-group">
-                        <button type="submit" class="btn btn-default set-task-done-button">
-                          <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                      </div>
-                    </form>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
-
       </div>
 
-      <div class="col-md-2"></div>
+      {% for date, tasksThisDay in tasks %}
+        <div class="day-tasks">
+          <p class="date-label pull-right">{{ date|date('D, jS M') }}</p>
+          <ul>
+            {% for task in tasksThisDay %}
+              <li class="{% if task.isDone %}task-done{% else %}task-not-done{% endif %}">{{ task.body }}
+                {% if not task.isDone %}
+                  <form action="{{ path('to_be_done_set_done') }}" method="post" class="form-inline">
+                    <input type="hidden" value="{{ task.id }}" name="task_id">
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-default set-task-done-button">
+                        <span class="glyphicon glyphicon-ok"></span>
+                      </button>
+                    </div>
+                  </form>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+
     </div>
+
+    <div class="col-md-2"></div>
   </div>
 
 {% endblock %}

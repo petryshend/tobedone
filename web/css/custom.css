@@ -34,3 +34,8 @@ li form {
 .set-task-done-button {
 
 }
+
+.new-task-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
