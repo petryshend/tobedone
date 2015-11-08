@@ -10,6 +10,10 @@
 
       <h1>ToBeDone</h1>
 
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>Username: {{ app.user.username }}</p>
+      {% endif %}
+
       <div class="new-task-form">
         {{ form_start(newTaskForm, {'attr': {'class': 'form-inline'}}) }}
         <div class="form-group">

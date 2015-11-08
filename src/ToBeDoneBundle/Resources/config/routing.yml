@@ -11,3 +11,13 @@ to_be_done_set_done:
     path:     /set-done
     defaults: { _controller: ToBeDoneBundle:Tasks:setDone}
     methods: [POST]
+
+login_route:
+    path: /login
+    defaults: { _controller: ToBeDoneBundle:Security:login }
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout
