@@ -28,18 +28,16 @@
           <p class="date-label pull-right">{{ date|date('D, jS M') }}</p>
           <ul>
             {% for task in tasksThisDay %}
-              <li class="{% if task.isDone %}task-done{% else %}task-not-done{% endif %}">{{ task.body }}
-                {% if not task.isDone %}
-                  <form action="{{ path('to_be_done_set_done') }}" method="post" class="form-inline">
+                {% if task.isDone %}
+                  <li class="task-done">{{ task.body }}</li>
+                {% else %}
+                  <form action="{{ path('to_be_done_set_done') }}" method="post">
                     <input type="hidden" value="{{ task.id }}" name="task_id">
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-default set-task-done-button">
-                        <span class="glyphicon glyphicon-ok"></span>
-                      </button>
-                    </div>
+                    <li class="task-not-done">
+                      <button type="submit" class="link-button">{{ task.body }}</button>
+                    </li>
                   </form>
                 {% endif %}
-              </li>
             {% endfor %}
           </ul>
         </div>
