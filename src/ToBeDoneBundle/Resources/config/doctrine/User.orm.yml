@@ -1,6 +1,6 @@
 ToBeDoneBundle\Entity\User:
     type: entity
-    table: null
+    table: users
     repositoryClass: ToBeDoneBundle\Entity\UserRepository
     id:
         id:
