@@ -1,0 +1,9 @@
+ToBeDoneBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: ~
+
+        plainPassword:
+            - NotBlank: ~
+            - Length:
+                min: 4

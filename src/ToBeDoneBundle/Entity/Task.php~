@@ -114,4 +114,33 @@ class Task
         $this->created = new \DateTime();
         $this->isDone= false;
     }
+    /**
+     * @var \ToBeDoneBundle\Entity\User
+     */
+    private $user;
+
+
+    /**
+     * Set user
+     *
+     * @param \ToBeDoneBundle\Entity\User $user
+     *
+     * @return Task
+     */
+    public function setUser(\ToBeDoneBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ToBeDoneBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
