@@ -2,6 +2,7 @@
 
 namespace ToBeDoneBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -40,6 +41,15 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @var Task[]
+     */
+    protected $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -205,5 +215,39 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * Add task
+     *
+     * @param \ToBeDoneBundle\Entity\Task $task
+     *
+     * @return User
+     */
+    public function addTask(\ToBeDoneBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Remove task
+     *
+     * @param \ToBeDoneBundle\Entity\Task $task
+     */
+    public function removeTask(\ToBeDoneBundle\Entity\Task $task)
+    {
+        $this->tasks->removeElement($task);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }

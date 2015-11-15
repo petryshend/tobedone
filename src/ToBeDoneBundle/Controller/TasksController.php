@@ -12,8 +12,9 @@ class TasksController extends Controller
 {
     public function indexAction()
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $tasks = $this->getDoctrine()->getRepository('ToBeDoneBundle:Task')
-            ->findBy([], ['created' => 'DESC']);
+            ->findBy(['user' => $user], ['created' => 'DESC']);
 
         $newTask = new Task();
         $newTaskForm = $this->createForm(
@@ -44,9 +45,11 @@ class TasksController extends Controller
         $form = $this->createForm(new TaskType(), $task);
         $form->handleRequest($request);
         if ($form->isValid()) {
+            $task->setUser($this->get('security.token_storage')->getToken()->getUser());
             $this->persistTask($task);
             return $this->redirectToRoute('to_be_done_homepage');
         }
+        return $this->redirectToRoute('to_be_done_homepage');
     }
 
     /**

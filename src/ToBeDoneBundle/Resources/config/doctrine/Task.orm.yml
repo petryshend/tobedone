@@ -8,6 +8,15 @@ ToBeDoneBundle\Entity\Task:
             id: true
             generator:
                 strategy: AUTO
+
+    manyToOne:
+        user:
+            targetEntity: ToBeDoneBundle\Entity\User
+            inversedBy: tasks
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+
     fields:
         body:
             type: string

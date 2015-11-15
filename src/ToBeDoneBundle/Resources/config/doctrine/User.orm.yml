@@ -8,6 +8,12 @@ ToBeDoneBundle\Entity\User:
             id: true
             generator:
                 strategy: AUTO
+
+    oneToMany:
+        tasks:
+            targetEntity: ToBeDoneBundle\Entity\Task
+            mappedBy: user
+
     fields:
         username:
             type: string
