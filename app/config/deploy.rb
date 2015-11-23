@@ -1,9 +1,11 @@
-set :application, "set your application name here"
-set :domain,      "#{application}.com"
-set :deploy_to,   "/var/www/#{domain}"
+set :application, "ToBeDone"
+set :domain,      "192.168.1.20"
+set :user,        "px"
+set :deploy_to,   "/var/www/html"
 set :app_path,    "app"
 
-set :repository,  "#{domain}:/var/repos/#{application}.git"
+
+set :repository,  "https://github.com/petryshend/tobedone.git"
 set :scm,         :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `subversion`, `mercurial`, `perforce`, or `none`
 
@@ -17,3 +19,6 @@ set  :keep_releases,  3
 
 # Be more verbose by uncommenting the following line
 # logger.level = Logger::MAX_LEVEL
+
+default_run_options[:pty] = true
+
