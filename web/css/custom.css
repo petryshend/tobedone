@@ -59,3 +59,9 @@ li form {
     left: 0;
     right: 0;
 }
+
+@media screen and (max-width: 768px) {
+    body {
+        background: #800f17;
+    }
+}
