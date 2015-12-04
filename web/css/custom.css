@@ -64,4 +64,8 @@ li form {
     body {
         background: #800f17;
     }
+
+    .day-tasks {
+        font-size: 1.2em;
+    }
 }
