@@ -5,10 +5,14 @@ namespace ToBeDoneBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\Response;
 
 class VideoController extends Controller
 {
-    public function indexAction()
+    /**
+     * @return Response
+     */
+    public function listAction()
     {
         $finder = new Finder();
 
@@ -23,8 +27,17 @@ class VideoController extends Controller
         }
 
         return $this->render(
-            '@ToBeDone/video/video.html.twig',
+            '@ToBeDone/video/video_list.html.twig',
             ['fileNames' => $fileNames]
         );
+    }
+
+    /**
+     * @param string $filename
+     * @return Response
+     */
+    public function singleAction($filename)
+    {
+        return $this->render('@ToBeDone/video/video.html.twig', ['filename' => $filename]);
     }
 }

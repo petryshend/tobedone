@@ -2,10 +2,18 @@
 
 {% block body %}
 
-  <ul>
-    {% for filename in fileNames %}
-      <li><a href="{{ '/movies/' ~ filename }}">{{ filename }}</a></li>
-    {% endfor %}
-  </ul>
+        <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" width="640" height="360" id="vlc" events="True">
+          <embed pluginspage="http://www.videolan.org"
+                 src="{{ '/movies/' ~ filename }}"
+                 type="application/x-vlc-plugin"
+                 version="VideoLAN.VLCPlugin.2"
+                 width="1280"
+                 height="720"
+                 toolbar="true"
+                 loop="false"
+                 text="Waiting for video"
+                 name="vlc">
+          </embed>
+        </object>
 
 {% endblock %}
