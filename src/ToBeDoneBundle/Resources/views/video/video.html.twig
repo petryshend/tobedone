@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  <ul>
+    {% for filename in fileNames %}
+      <li><a href="{{ '/movies/' ~ filename }}">{{ filename }}</a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
