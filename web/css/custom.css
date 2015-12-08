@@ -62,10 +62,39 @@ li form {
 
 @media screen and (max-width: 768px) {
     body {
-        background: #800f17;
+        background: #f1f1f1;
+        color: black;
+    }
+
+    .container {
+        padding-left: 5px;
+        padding-right: 5px;
     }
 
     .day-tasks {
+        background: white;
+        border: 0;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         font-size: 1.2em;
+        border-radius: 0;
+        min-height: 2em;
+    }
+
+    .date-label {
+        font-size: 0.8em;
+        color:#8c8c8c;
+        padding-top: 5px;
+    }
+
+    .link-button {
+        text-align: left;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    ul form li {
+        list-style-type: none;
     }
 }
