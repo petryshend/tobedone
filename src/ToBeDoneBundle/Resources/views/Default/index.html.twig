@@ -12,7 +12,7 @@
   {% endif %}
 
   <div class="new-task-form">
-    {{ form_start(newTaskForm, {'attr': {'class': 'form-inline', 'autocomplete': 'off'}}) }}
+    {{ form_start(newTaskForm, {'attr': {'autocomplete': 'off'}}) }}
     <div class="form-group">
       {{ form_errors(newTaskForm) }}
       {{ form_label(newTaskForm.body) }}
