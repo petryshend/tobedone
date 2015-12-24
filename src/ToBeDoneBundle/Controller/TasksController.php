@@ -73,6 +73,26 @@ class TasksController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request)
+    {
+        $taskId = $request->get('task_id');
+        $em = $this->getDoctrine()->getManager();
+        $task = $em->getRepository('ToBeDoneBundle:Task')->find($taskId);
+
+        if (!$task) {
+            throw $this->createNotFoundException('No task found with id ' . $taskId);
+        }
+
+        $em->remove($task);
+        $em->flush();
+
+        return $this->redirectToRoute('to_be_done_homepage');
+    }
+
+    /**
      * @param Task $task
      */
     private function persistTask(Task $task)

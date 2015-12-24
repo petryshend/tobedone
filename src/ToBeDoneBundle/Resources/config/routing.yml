@@ -12,6 +12,11 @@ to_be_done_set_done:
     defaults: { _controller: ToBeDoneBundle:Tasks:setDone}
     methods: [POST]
 
+to_be_done_delete_task:
+    path:     /delete
+    defaults: { _controller: ToBeDoneBundle:Tasks:delete }
+    methods: [POST]
+
 to_be_done_registration:
     path: /register
     defaults: { _controller: ToBeDoneBundle:Registration:register }

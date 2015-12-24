@@ -17,13 +17,6 @@ body {
     min-height: 2em;
 }
 
-.date-label {
-    font-size: 0.8em;
-    color:#8c8c8c;
-    padding-top: 5px;
-    padding-right: 5px;
-}
-
 .link-button {
     font-weight: bold;
     text-align: left;
@@ -40,14 +33,16 @@ body {
 
 ul {
     padding-left: 20px;
+    padding-right: 20px;
 }
 
-ul form li {
+li {
     list-style-type: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid darkgrey;
 }
 
-li.task-done {
-    list-style-type: none;
-    text-decoration: line-through;
-    font-style: italic;
+li:last-of-type {
+    border-bottom: none;
 }

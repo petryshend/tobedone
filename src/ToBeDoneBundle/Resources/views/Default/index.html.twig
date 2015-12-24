@@ -2,46 +2,59 @@
 
 {% block body %}
 
-  <h1>ToBeDone</h1>
+    <h1>ToBeDone</h1>
 
-  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <p>
-      Username: {{ app.user.username }}
-      <a href="{{ path('logout') }}">Logout</a>
-    </p>
-  {% endif %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p>
+            Username: {{ app.user.username }}
+            <a href="{{ path('logout') }}">Logout</a>
+        </p>
+    {% endif %}
 
-  <div class="new-task-form">
-    {{ form_start(newTaskForm, {'attr': {'autocomplete': 'off'}}) }}
-    <div class="form-group">
-      {{ form_errors(newTaskForm) }}
-      {{ form_label(newTaskForm.body) }}
-      {{ form_widget(newTaskForm.body, {'attr': {'class': 'form-control', 'size': '80', 'autocomplete': 'off'}}) }}
+    <div class="new-task-form">
+        {{ form_start(newTaskForm, {'attr': {'autocomplete': 'off'}}) }}
+        <div class="form-group">
+            {{ form_errors(newTaskForm) }}
+            {{ form_label(newTaskForm.body) }}
+            {{ form_widget(newTaskForm.body, {'attr': {'class': 'form-control', 'size': '80', 'autocomplete': 'off'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(newTaskForm.save, {'attr': {'class': 'btn btn-default'}}) }}
+        </div>
+        {{ form_end(newTaskForm) }}
     </div>
-    <div class="form-group">
-      {{ form_row(newTaskForm.save, {'attr': {'class': 'btn btn-default'}}) }}
-    </div>
-    {{ form_end(newTaskForm) }}
-  </div>
 
-  {% for date, tasksThisDay in tasks %}
-    <div class="day-tasks">
-      <p class="date-label pull-right">{{ date|date('D, jS M') }}</p>
-      <ul>
-        {% for task in tasksThisDay %}
-            {% if task.isDone %}
-              <li class="task-done">{{ task.body }}</li>
-            {% else %}
-              <form action="{{ path('to_be_done_set_done') }}" method="post">
-                <input type="hidden" value="{{ task.id }}" name="task_id">
-                <li class="task-not-done">
-                  <button type="submit" class="link-button">{{ task.body }}</button>
-                </li>
-              </form>
-            {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endfor %}
+    {% for date, tasksThisDay in tasks %}
+        <p>{{ date|date('D, jS M') }}</p>
+        <div class="day-tasks">
+            <ul>
+                {% for task in tasksThisDay %}
+                    <li>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ task.body }}
+                            </div>
+                            <div class="col-md-2">
+                                {% if not task.isDone %}
+                                    <form action="{{ path('to_be_done_set_done') }}" method="post">
+                                        <input type="hidden" value="{{ task.id }}" name="task_id">
+                                        <button type="submit">set done</button>
+                                    </form>
+                                {% else %}
+                                    done
+                                {% endif %}
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ path('to_be_done_delete_task') }}" method="post">
+                                    <input type="hidden" value="{{ task.id }}" name="task_id">
+                                    <button type="submit">delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
 
 {% endblock %}
