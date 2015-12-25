@@ -1,3 +1,9 @@
 services:
     to_be_done.utils:
         class: ToBeDoneBundle\Utils\Utils
+
+    tobedone.twig_extension:
+        class: ToBeDoneBundle\Twig\ToBeDoneExtension
+        public: false
+        tags:
+            - { name: twig.extension }

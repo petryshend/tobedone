@@ -28,21 +28,35 @@
         <p>{{ date|date('D, jS M') }}</p>
         <div class="day-tasks">
             <ul>
-                {% for task in tasksThisDay %}
+                {% for task in tasksThisDay|doneTasks(false) %}
                     <li>
                         <div class="row">
                             <div class="col-md-8">
                                 {{ task.body }}
                             </div>
                             <div class="col-md-2">
-                                {% if not task.isDone %}
-                                    <form action="{{ path('to_be_done_set_done') }}" method="post">
-                                        <input type="hidden" value="{{ task.id }}" name="task_id">
-                                        <button type="submit">set done</button>
-                                    </form>
-                                {% else %}
-                                    done
-                                {% endif %}
+                                <form action="{{ path('to_be_done_set_done') }}" method="post">
+                                    <input type="hidden" value="{{ task.id }}" name="task_id">
+                                    <button type="submit">set done</button>
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form action="{{ path('to_be_done_delete_task') }}" method="post">
+                                    <input type="hidden" value="{{ task.id }}" name="task_id">
+                                    <button type="submit">delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+                {% for task in tasksThisDay|doneTasks %}
+                    <li>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ task.body }}
+                            </div>
+                            <div class="col-md-2">
+                                Done
                             </div>
                             <div class="col-md-2">
                                 <form action="{{ path('to_be_done_delete_task') }}" method="post">
