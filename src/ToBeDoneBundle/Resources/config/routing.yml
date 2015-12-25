@@ -31,10 +31,3 @@ login_check:
 logout:
     path: /logout
 
-video_list:
-    path: /video
-    defaults: { _controller: ToBeDoneBundle:Video:list }
-
-video:
-    path: /video/{filename}
-    defaults: { _controller: ToBeDoneBundle:Video:single }
